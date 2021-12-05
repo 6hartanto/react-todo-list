@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const DisplayTodos = (props) => {
-  const [sort, setSort] = useState("active");
+  const [sort, setSort] = useState("todo");
   return (
     <div className="displaytodos">
       <div className="buttons">
@@ -28,7 +28,7 @@ const DisplayTodos = (props) => {
         <button onClick={() => setSort("all")}>All</button>
       </div>
       <ul>
-        {props.todos.length > 0 && sort === "active"
+        {props.todos.length > 0 && sort === "todo"
           ? props.todos.map((item) => {
             return (
               item.completed === false && (
@@ -40,6 +40,36 @@ const DisplayTodos = (props) => {
                   completeTodo={props.completeTodo}
                 />
               )
+            );
+          })
+          : null}
+        {/* for completed items */}
+        {props.todos.length > 0 && sort === "completed"
+          ? props.todos.map((item) => {
+            return (
+              item.completed === true && (
+                <TodoItem
+                  key={item.id}
+                  item={item}
+                  removeTodo={props.removeTodo}
+                  updateTodo={props.updateTodo}
+                  completeTodo={props.completeTodo}
+                />
+              )
+            );
+          })
+          : null}
+        {/* for all items */}
+        {props.todos.length > 0 && sort === "all"
+          ? props.todos.map((item) => {
+            return (
+              <TodoItem
+                key={item.id}
+                item={item}
+                removeTodo={props.removeTodo}
+                updateTodo={props.updateTodo}
+                completeTodo={props.completeTodo}
+              />
             );
           })
           : null}
