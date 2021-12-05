@@ -40,12 +40,13 @@ const TodoItem = (props) => {
             <IoCheckmarkDoneSharp />
           </button>
         )}
-        <button
-          style={{ color: 'red' }}
-          onClick={() => removeTodo(item.id)}>
-          {" "}
-          <IoClose />
-        </button>{" "}
+        {item.completed === false && (
+          <button
+            style={{ color: 'red' }}
+            onClick={() => removeTodo(item.id)}>
+            <IoClose />
+          </button>
+        )}
       </div>
       {item.completed && <span className="completed">done</span>}
     </li>
